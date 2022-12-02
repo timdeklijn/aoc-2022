@@ -6,6 +6,7 @@ mod aoc_trait;
 // helps using all 'days' as inputs for `run`.
 mod day0;
 mod day1;
+mod day2;
 
 use aoc_trait::AocDay;
 
@@ -60,7 +61,6 @@ fn runner(day: &Box<dyn AocDay>, part: usize) {
 }
 
 /// Depending on `part` run part 1, part 2 or both parts of the solution.
-// fn run<A: AocDay>(day: A, part: usize) {
 fn run(day: Box<dyn AocDay>, part: usize) {
     match part {
         0 => {
@@ -79,6 +79,7 @@ fn main() {
     let day: Box<dyn AocDay> = match env::args().nth(1).expect("This should work").as_str() {
         "0" => Box::new(day0::Day {}),
         "1" => Box::new(day1::Day {}),
+        "2" => Box::new(day2::Day {}),
         _ => panic!("Do not forget to add a day number to the main function"),
     };
 
