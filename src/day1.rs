@@ -8,56 +8,19 @@ impl AocDay for Day {
     }
 
     fn part_1(&self, s: String) -> i64 {
-        let mut max = 0;
-        let mut sub_total = 0;
-
-        for l in s.lines() {
-            // Line is either empty or has a number.
-            match l {
-                "" => {
-                    if sub_total > max {
-                        max = sub_total
-                    }
-                    sub_total = 0
-                }
-                _ => {
-                    let n: i64 = l.parse().unwrap();
-                    sub_total += n;
-                }
-            }
-        }
-
-        // Do not forget the last element
-        if sub_total > max {
-            max = sub_total
-        }
-
-        max
+        s.split("\n\n")
+            .map(|x| x.lines().map(|y| y.parse::<i64>().unwrap()).sum())
+            .max()
+            .unwrap()
     }
 
     fn part_2(&self, s: String) -> i64 {
-        let mut totals: Vec<i64> = Vec::new();
-        let mut sub_total = 0;
-
-        for l in s.lines() {
-            match l {
-                "" => {
-                    totals.push(sub_total);
-                    sub_total = 0;
-                }
-                _ => {
-                    let n: i64 = l.parse().unwrap();
-                    sub_total += n;
-                }
-            }
-        }
-        // Do not forget the last element
-        totals.push(sub_total);
-
-        // Sort+Reverse the vec, then sum the first 3 elements.
-        totals.sort();
-        totals.reverse();
-        totals[0..3].iter().sum::<i64>()
+        let mut tmp = s
+            .split("\n\n")
+            .map(|x| x.lines().map(|y| y.parse::<i64>().unwrap()).sum())
+            .collect::<Vec<i64>>();
+        tmp.sort_by(|a, b| b.cmp(a));
+        tmp.iter().take(3).sum::<i64>()
     }
 
     fn test_part_1(&self) -> (i64, bool) {
