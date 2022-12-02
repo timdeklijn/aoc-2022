@@ -1,3 +1,4 @@
+/// This is the first puzzle of 2021 to test the trait stuff with
 use crate::aoc_trait::AocDay;
 
 pub struct Day {}

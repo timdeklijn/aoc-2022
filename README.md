@@ -30,7 +30,7 @@ impl AocDay for Day {
     fn test_part_1(&self) -> (i64, bool) {
         let input = r#""#
             .to_string();
-        let expected: i64 = 24000;
+        let expected: i64 = 1;
         let answer = self.part_1(input);
         (answer, expected == answer)
     }
@@ -38,7 +38,7 @@ impl AocDay for Day {
     fn test_part_2(&self) -> (i64, bool) {
         let input = r#""#
             .to_string();
-        let expected: i64 = 45000;
+        let expected: i64 = 1;
         let answer = self.part_2(input);
         (answer, expected == answer)
     }
@@ -52,7 +52,7 @@ and `test_part_2`.
 ## Adding a new day
 
 - add `mod dayX` to the top of `main.rs`
-- add `"1" => Box::new(day1::Day {}),` to the `main` function.
+- add `"X" => Box::new(dayX::Day {}),` to the `main` function.
 - create a file called `src/dayX`
 - Add the template from above to the file and start working on a solution.
 - Once the test passes add the input for that day to: `data/day_X.txt`

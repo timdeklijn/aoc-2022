@@ -15,12 +15,12 @@ impl AocDay for Day {
     }
 
     fn part_2(&self, s: String) -> i64 {
-        let mut tmp = s
+        let mut answer = s
             .split("\n\n")
             .map(|x| x.lines().map(|y| y.parse::<i64>().unwrap()).sum())
             .collect::<Vec<i64>>();
-        tmp.sort_by(|a, b| b.cmp(a));
-        tmp.iter().take(3).sum::<i64>()
+        answer.sort_by(|a, b| b.cmp(a));
+        answer.iter().take(3).sum::<i64>()
     }
 
     fn test_part_1(&self) -> (i64, bool) {

@@ -2,9 +2,9 @@ use crate::aoc_trait::AocDay;
 
 /// RockPaperScissors moves
 enum RPS {
-    Rock,     // 1
-    Paper,    // 2
-    Scissors, // 3
+    Rock,     // 1 points
+    Paper,    // 2 points
+    Scissors, // 3 points
 }
 
 /// Parse elf input
