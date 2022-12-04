@@ -17,8 +17,7 @@ fn calc_priority(c: &char) -> i64 {
 /// halves. Then calculate the priority score of the character. Return that
 /// score.
 fn part_1(l: &str) -> i64 {
-    let i: usize = l.len() / 2;
-    let (a, b) = l.split_at(i);
+    let (a, b) = l.split_at(l.len() / 2);
     for c in a.chars() {
         if b.contains(c) {
             return calc_priority(&c);
