@@ -1,4 +1,4 @@
-/// Bit anoyhing that the answer to this day is not a number but a string. This
+/// Bit annoying that the answer to this day is not a number but a string. This
 /// is why the returned value is not the actual anser. The answer is simply
 /// printed in the solution functions.
 use std::{collections::HashMap, num::ParseIntError, str::FromStr};
