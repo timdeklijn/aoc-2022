@@ -123,7 +123,7 @@ impl AocDay for Day {
         // Apply the commands to the stacks
         for command in commands {
             for _ in 0..command.amount as usize {
-                // Pop top create
+                // Pop top crate
                 let c = match stacks.get_mut(&command.start) {
                     Some(x) => x.pop().unwrap(),
                     None => unreachable!("stack should have boxes"),
@@ -150,7 +150,7 @@ impl AocDay for Day {
         // Apply the commands to the stacks
         for command in commands {
             let mut c = match stacks.get_mut(&command.start) {
-                // get the command.amount top creates
+                // get the command.amount top crates
                 Some(x) => {
                     let index = x.len() - command.amount as usize;
                     x.split_off(index)
