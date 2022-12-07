@@ -11,6 +11,7 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 use aoc_trait::AocDay;
 
@@ -88,6 +89,7 @@ fn main() {
         "4" => Box::new(day4::Day {}),
         "5" => Box::new(day5::Day {}),
         "6" => Box::new(day6::Day {}),
+        "7" => Box::new(day7::Day {}),
         _ => panic!("Do not forget to add a day number to the main function"),
     };
 
