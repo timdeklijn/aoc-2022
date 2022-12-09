@@ -76,28 +76,23 @@ impl AocDay for Day {
         let mut coords = HashSet::new();
         coords.insert(tail);
 
-        let _ = s
-            .lines()
-            .map(|l| {
-                let (dir, amount) = l.split_once(" ").expect("input can be parsed");
-                let amount = amount.trim().parse::<i64>().expect("is integer");
+        for l in s.lines() {
+            let (dir, amount) = l.split_once(" ").expect("input can be parsed");
+            let amount = amount.trim().parse::<i64>().expect("is integer");
 
-                for _ in 0..amount {
-                    match dir {
-                        "U" => head.1 += 1,
-                        "D" => head.1 -= 1,
-                        "L" => head.0 -= 1,
-                        "R" => head.0 += 1,
-                        _ => unreachable!("This is not a direction"),
-                    }
-
-                    tail = determine_move(tail, head);
-                    coords.insert(tail);
+            for _ in 0..amount {
+                match dir {
+                    "U" => head.1 += 1,
+                    "D" => head.1 -= 1,
+                    "L" => head.0 -= 1,
+                    "R" => head.0 += 1,
+                    _ => unreachable!("This is not a direction"),
                 }
 
-                amount
-            })
-            .collect::<Vec<i64>>();
+                tail = determine_move(tail, head);
+                coords.insert(tail);
+            }
+        }
         coords.len() as i64
     }
 
@@ -106,34 +101,28 @@ impl AocDay for Day {
         let mut coords = HashSet::new();
         coords.insert(rope[9]);
 
-        let _ = s
-            .lines()
-            .map(|l| {
-                let (dir, amount) = l.split_once(" ").expect("input can be parsed");
-                let amount = amount.trim().parse::<i64>().expect("is integer");
+        for l in s.lines() {
+            let (dir, amount) = l.split_once(" ").expect("input can be parsed");
+            let amount = amount.trim().parse::<i64>().expect("is integer");
 
-                // Move the head
-                for _ in 0..amount {
-                    match dir {
-                        "U" => rope[0].1 += 1,
-                        "D" => rope[0].1 -= 1,
-                        "L" => rope[0].0 -= 1,
-                        "R" => rope[0].0 += 1,
-                        _ => unreachable!("This is not a direction"),
-                    }
-
-                    // move the rest
-                    for i in 1..=9 {
-                        rope[i] = determine_move(rope[i], rope[i - 1])
-                    }
-
-                    coords.insert(rope[9]);
+            // Move the head
+            for _ in 0..amount {
+                match dir {
+                    "U" => rope[0].1 += 1,
+                    "D" => rope[0].1 -= 1,
+                    "L" => rope[0].0 -= 1,
+                    "R" => rope[0].0 += 1,
+                    _ => unreachable!("This is not a direction"),
                 }
 
-                amount
-            })
-            .collect::<Vec<i64>>();
+                // move the rest
+                for i in 1..=9 {
+                    rope[i] = determine_move(rope[i], rope[i - 1])
+                }
 
+                coords.insert(rope[9]);
+            }
+        }
         coords.len() as i64
     }
 
