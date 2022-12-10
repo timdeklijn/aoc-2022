@@ -61,7 +61,7 @@ impl AocDay for Day {
                 pos = 0;
             }
 
-            // Increae cycle
+            // Increase cycle
             cycle += 1;
 
             // Handle noop
