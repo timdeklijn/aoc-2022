@@ -18,10 +18,12 @@ struct Op {
 impl Op {
     /// Do the operation. If self.num is None use val as value for the op.
     fn do_it(&self, val: &i64) -> i64 {
+        // Determine what to operate with
         let n = match self.num {
             Some(n) => n,
             None => *val,
         };
+        // match the operation and perform the calculation
         match self.op.as_str() {
             "*" => n * val,
             "+" => n + val,
@@ -123,7 +125,7 @@ impl FromStr for Monkey {
             test,
             if_true,
             if_false,
-            inspected: 0,
+            inspected: 0, // count number of inspections
         })
     }
 }
@@ -140,10 +142,11 @@ impl Monkeys {
         // Chinese remainder theorem:
         let mm: i64 = self.inner.iter().map(|m| m.test).product();
 
+        // Use the indices to prevent the borrow checker from being anoying.
         for m in 0..self.inner.len() {
             for i in 0..self.inner[m].items.len() {
                 // Calculate worry and run the test to see to which monkey the item
-                // will be passed
+                // will be passed.
                 let worry = self.inner[m].calc_worry(&self.inner[m].items[i], part);
                 let index = self.inner[m].run_test(&worry);
 
@@ -153,8 +156,8 @@ impl Monkeys {
                         self.inner[index].items.push(worry);
                     }
                     Part::Two => {
-                        // Use this special modifyer to reduce the worry number withou
-                        // modifying its 'modulo' properties
+                        // Use this special modifyer to reduce the worry number without
+                        // modifying its 'modulo' properties.
                         let new_worry = worry % mm;
                         self.inner[index].items.push(new_worry);
                     }
@@ -187,13 +190,13 @@ impl AocDay for Day {
     }
 
     fn part_1(&self, s: String) -> i64 {
+        // Parse the input and run the rounds
         let mut monkeys = Monkeys::from_str(&s).expect("monkeys can be parsed");
         let part = Part::One;
         for _ in 0..20 {
             monkeys.round(&part);
         }
-        //
-        // Fet the two highest inspection numbers
+        // Get the two highest inspection numbers
         let mut answer_vec = Vec::new();
         for m in monkeys.inner {
             answer_vec.push(m.inspected);
@@ -202,6 +205,8 @@ impl AocDay for Day {
         answer_vec[0] * answer_vec[1]
     }
 
+    /// Part 2 is similar to part one except for modifying the worry value after
+    /// each inspection.
     fn part_2(&self, s: String) -> i64 {
         let mut monkeys = Monkeys::from_str(&s).expect("monkeys can be parsed");
         let part = Part::Two;
